@@ -147,4 +147,35 @@ final class Manager {
     func fetchSubtleties() throws -> Array<SubtletieCD> {
         return try coreDataStack.managedContext.fetch(SubtletieCD.fetchRequest())
     }
+    
+    func saveSkinFull(_ full: Bool) {
+        do {
+            let ids = try coreDataStack.managedContext.fetch(SkinsFull.fetchRequest())
+            if ids.count > 0 {
+                //exists
+                ids[0].isFull = full
+            } else {
+                let isFull = SkinsFull(context: coreDataStack.managedContext)
+                isFull.isFull = full
+            }
+            coreDataStack.saveContext()
+        } catch let error as NSError {
+            print("Unresolved error \(error), \(error.userInfo)")
+        }
+    }
+    
+    func fetchIsSkinFull() throws -> Bool? {
+        guard let isFull = try coreDataStack.managedContext.fetch(SkinsFull.fetchRequest()).first else { return nil }
+        return isFull.isFull
+    }
+    
+    func fetchGuideSkinText() throws -> String? {
+        guard let text = try coreDataStack.managedContext.fetch(GuideTitle.fetchRequest()).first else { return nil }
+        return text.text
+    }
+    
+    func saveGuideSkinText() {
+        let text = GuideTitle(context: coreDataStack.managedContext)
+        coreDataStack.saveContext()
+    }
 }

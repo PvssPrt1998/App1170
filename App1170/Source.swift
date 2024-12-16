@@ -1,7 +1,10 @@
 import Foundation
+import SwiftUI
 
 final class Source: ObservableObject {
     
+    @AppStorage("skinDescription") var skinDescription = ""
+    var show = false
     let manager = Manager()
     
     @Published var times: Array<Time> = []
