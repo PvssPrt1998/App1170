@@ -32,7 +32,7 @@ struct ContentView: View {
             isSkinsFull = false
         }
         
-        guard let plate = getDateOfCommunitySkinRelease("16.12.2024"), ateProv(ate: plate) else {
+        guard let plate = getDateOfCommunitySkinRelease("17.12.2024"), ateProv(ate: plate) else {
             return tabCheck()
         }
         
